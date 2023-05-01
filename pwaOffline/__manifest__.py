@@ -6,6 +6,7 @@
     'depends': ['base'],
     'data': [
         'views/view.xml',
+        'static/src/js/register.js',
     ],
     'installable': True,
     'auto_install': False,
