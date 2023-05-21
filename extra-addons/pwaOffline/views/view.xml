@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="mi_vista" model="ir.ui.view">
+            <field name="name">Mi vista</field>
+            <field name="model">model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="campo1"/>
+                            <field name="campo2"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
