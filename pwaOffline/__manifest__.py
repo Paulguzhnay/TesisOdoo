@@ -8,6 +8,7 @@
                 ],
     'data': [
         'views/view.xml',
+   #     'static/src/xml/assets_backend.xml',
     ],
     'application': True,
     'installable': True,
@@ -15,6 +16,7 @@
     "assets": {
         "web.assets_backend": [
             '/pwaOffline/static/src/js/pos.js',
+            '/pwaOffline/static/src/js/pos2.js',
         ]
     },
     'images': ['static/image/pwa.png'],

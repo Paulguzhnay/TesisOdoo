@@ -6,4 +6,8 @@ if ('serviceWorker' in navigator) {
         .catch(function(error) {
             console.log('Service worker FALLO:', error);
         });
+
 }
+
+
+
