@@ -4,10 +4,9 @@
     'summary': 'PWA para el Modulo de Punto de Venta',
     'description': 'Este modulo va a permitir usar el Point Of Sale de manera offline',
     'author': 'Universidad Politecnica Salesiana',
-    'depends': ['point_of_sale',
-                ],
+    'depends': ['point_of_sale'],
     'data': [
-        'views/view.xml',
+        #'views/view.xml',
    #     'static/src/xml/assets_backend.xml',
     ],
     'application': True,
@@ -17,6 +16,7 @@
         "web.assets_backend": [
             '/pwaOffline/static/src/js/pos.js',
             '/pwaOffline/static/src/js/pos2.js',
+            '/pwaOffline/static/src/xml/**/*',
         ]
     },
     'images': ['static/image/pwa.png'],

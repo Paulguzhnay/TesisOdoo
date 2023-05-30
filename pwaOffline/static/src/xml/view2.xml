@@ -1,10 +1,9 @@
-<record id="custom_point_of_sale_view_form_product" model="ir.ui.view">
-    <field name="name">custom_point_of_sale.paymentScreen</field>
-    <field name="model">product.product</field>
-    <field name="inherit_id" ref="point_of_sale.PaymentScreen"/>
-    <field name="arch" type="xml">
-        <xpath expr="//field[@name='name']" position="after">
-            <field name="custom_field" string="Custom Field"/>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="PaymentScreen" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='top-content-center']" position="replace">
+            <h1>Payment UPS</h1>
         </xpath>
-    </field>
-</record>
+    </t>
+</templates>
