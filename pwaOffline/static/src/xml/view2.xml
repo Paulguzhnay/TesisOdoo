@@ -1,9 +1,169 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-    <t t-name="PaymentScreen" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
-        <xpath expr="//div[@class='top-content-center']" position="replace">
-            <h1>Payment UPS</h1>
+
+	<t t-name="BotonOffline" owl="1">
+		<div class="oe_status offline-order-management" t-on-click="onClick">
+			<div class="oe_icon oe_green" style="font-size: large;
+    margin-top: 13px;">
+				<i class="fa fa-fw fa-search" role="img" aria-label="Offline Order Management Button" title="Offline Order Management Button"></i>
+			</div>
+		</div>
+    </t>
+
+    <t t-name="Chrome" t-inherit="point_of_sale.Chrome" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('search-bar-portal')]" position="before">
+            <BotonOffline />
         </xpath>
     </t>
+
+	<t t-name="LineaOrden" owl="1">
+		<tr t-attf-class="client-line {{highlight}}" t-att-data-id="props.order.id"
+			t-on-click="trigger('click-order', {order: props.order})">
+			<td  t-att-data-id='props.order.id'
+				t-on-click="trigger('click-offlineOrderView',props.order)">
+				<t t-esc='props.order.name' />
+			</td>
+			<td  t-att-data-id='props.order.id'
+				t-on-click="trigger('click-offlineOrderView',props.order)">
+				<t t-esc="get_date(props.order.creation_date)"/>
+
+			</td>
+			<td  t-att-data-id='props.order.id'
+				t-on-click="trigger('click-offlineOrderView',props.order)">
+				<t t-esc="get_partner(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id'
+				t-on-click="trigger('click-offlineOrderView',props.order)">
+				<t t-esc='env.pos.format_currency(props.order.amount_total)' />
+			</td>
+			<td>
+				<div name="delete" class="col center very-narrow delete-button"  t-att-data-id='props.order.id' t-on-click="trigger('click-deleteOrder',props.order)">
+					<i aria-hidden="true" class="fa fa-trash"></i>
+				</div>
+			</td>
+		</tr>
+	</t>
+
+
+	<t t-name="PantallaOffline" owl="1">
+		<div class="offline-order-screen clientlist-screen screen">
+			<div class="screen-content">
+				<section class="top-content">
+					<span class='button back' t-on-click="back">
+						<i class='fa fa-angle-double-left'></i>
+						Cancel
+					</span>
+					<div class="searchbox-client top-content-center">
+						<input placeholder="Search Orders" size="1" t-on-keyup="searchOrders" class="input-search-orders"/>
+					</div>
+				</section>
+				<section class="full-content">
+                    <div class="client-window">
+                        <section class="subwindow list">
+                            <div class="subwindow-container">
+                                <div class="subwindow-container-fix scrollable-y">
+                                    <table class="client-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Date</th>
+                                                <th>Customer</th>
+                                                <th>Amount</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="client-list-contents">
+                                            <t t-foreach="orders" t-as="order"
+                                               t-key="order.id">
+                                                <LineaOrden order="order['data']"/>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+			</div>
+		</div>
+	</t>
+
+	<t t-name="OrdenOffline" owl="1">
+		<div role="dialog" class="modal-dialog">
+			<Draggable>
+				<div class="popup popup-confirm" style="min-width: 45% !important;">
+					<header class="title drag-handle">
+						Order
+					</header>
+					<main class="body">
+						<div style="font-size: 14px;">
+							<div>
+								<div style="display:flex;text-align: left;">
+									<div style="width: 20%;" class="popup-detail-section">Name :</div>
+									<div style="margin-right: 4%;" class="popup-detail-section">
+										<span t-esc="props.order.name"/>
+									</div>
+									<div style="margin-right: 4%;width: 20%;" class="popup-detail-section">Customer :</div>
+									<div class="popup-detail-section">
+										<span t-esc="get_partner(props.order.partner_id)"/>
+									</div>
+								</div>
+								<div style="display:flex;text-align: left;">
+									<div style="width: 20%;" class="popup-detail-section">Date :</div>
+									<div style="margin-right: 4%;" class="popup-detail-section">
+										<span t-esc="get_date(props.order.creation_date)"/>
+									</div>
+									<div style="margin-right: 4%;width: 20%;" class="popup-detail-section">Total Amount :</div>
+									<div class="popup-detail-section">
+										<span t-esc='env.pos.format_currency(props.order.amount_total)'/>
+									</div>
+								</div>
+							</div>
+							<div>
+								<table class="offline-detail-table" style='width:100%'>
+									<thead>
+										<tr style="border-bottom: 1px solid #999;    background: #bbb;background: #875a7b;color: #fff;">
+											<th style="text-align: left;padding: 5px;border-right: 1px solid #999;">Product</th>
+											<th style="text-align: center;padding: 5px;border-right: 1px solid #999;">Discount</th>
+											<th style="text-align: center;padding: 5px;border-right: 1px solid #999;">Qty</th>
+											<th style="text-align: center;padding: 5px;border-right: 1px solid #999;">Unit Price</th>
+											<th style="text-align: right;padding: 5px;border-right: 1px solid #999;">Total Amount</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="border-bottom: 1px solid #bbb;" t-foreach="props.order.lines || []" t-as="line">
+											<t t-set="ln" t-value="line[2]"/>
+											<td style="text-align: left;padding: 8px;border-right: 1px solid #bbb;">
+												<span t-esc='ln.full_product_name' />
+											</td>
+											<td style="text-align: center;padding: 8px;border-right: 1px solid #bbb;">
+												<span t-esc='ln.discount' />
+											</td>
+											<td style="text-align: center;padding: 8px;border-right: 1px solid #bbb;">
+												<span t-esc='ln.qty' />
+											</td>
+											<td style="text-align: center;padding: 8px;border-right: 1px solid #bbb;">
+												<span t-esc='env.pos.format_currency(ln.price_unit)'/>
+											</td>
+											<td style="text-align: right;padding: 8px;border-right: 1px solid #bbb;">
+												<span t-esc='env.pos.format_currency(ln.price_subtotal_incl)'/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</main>
+					<footer class="footer">
+						<div class="button cancel" t-on-click="cancel" style="background: #875a7b;color: #ffff;">
+							Close
+						</div>
+					</footer>
+				</div>
+			</Draggable>
+		</div>
+	</t>
+
+
 </templates>

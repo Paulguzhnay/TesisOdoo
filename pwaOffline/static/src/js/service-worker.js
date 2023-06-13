@@ -24,6 +24,10 @@ self.addEventListener('install', function (event) {
             return cache.addAll([
                 '/',
                 'pos2.js',
+                'BotonOffline.js',
+                'LineaOrden.js',
+                'OrdenOffline.js',
+                'PantallaOffline.js',
                 //'xml/view2.xml',
                // '/pos2.js'
 
