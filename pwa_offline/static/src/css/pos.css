@@ -1,0 +1,12 @@
+
+.popup-detail-section{
+    padding: 10px 0px;
+    font-weight: bold;
+    width: 24%;
+}
+
+.offline-detail-table{
+    width: 100%;
+    text-align: left;
+    border: 1px solid #bbb;
+}
