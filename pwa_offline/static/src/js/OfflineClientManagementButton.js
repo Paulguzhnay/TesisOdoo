@@ -6,7 +6,7 @@ odoo.define('pwa_offline.OfflineClientManagementButton', function (require) {
 
 	class OfflineClientManagementButton extends PosComponent {
 		async onClick() {
-			this.showTempScreen('OfflineOrderManagementScreen');
+			this.showTempScreen('OfflineClientManagementScreen');
 		}
 	}
 
