@@ -2,6 +2,7 @@ import json
 from odoo.http import Controller, request, route
 
 
+
 class PWA(Controller):
     def get_pwa_manifest_icons(self, pwa_icon):
         icons = []
@@ -70,7 +71,7 @@ class PWA(Controller):
             "name": "Odoo PWA",
             "short_name": "Odoo PWA",
             "icons": self.get_pwa_manifest_icons(pwa_icon),
-            "start_url": start_url,
+            "start_url": "/pos/web",
             "display": "standalone",
             "background_color": background_color,
             "theme_color": theme_color,

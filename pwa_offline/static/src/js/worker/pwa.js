@@ -7,7 +7,6 @@ odoo.define("pwa_offline.PWA", function (require) {
         init: function (params) {
             this._sw_version = params.sw_version;
         },
-
         /**
          * @returns {Promise}
          */

@@ -37,7 +37,7 @@ odoo.define("pwa_offline.PWAManager", function (require) {
                 );
             } else {
                 this._service_worker = navigator.serviceWorker;
-                this.registerServiceWorker("/pwa_offline/static/src/js/worker/services-workers.js", {
+                this.registerServiceWorker("/pwa_offline/static/src/js/lib/cache.js", {
                     updateViaCache: "none",
                 });
             }

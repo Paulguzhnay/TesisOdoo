@@ -1,0 +1,29 @@
+<templates>
+    <t t-name="PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit">
+        <t t-jquery=".partner-save-button" t-operation="before">
+            <button class="btn btn-primary btn-save-offline">Guardar Offline</button>
+        </t>
+    </t>
+</templates>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.btn-save-offline').on('click', function() {
+            var partnerData = {
+                name: $('#name').val(),
+                email: $('#email').val(),
+                // Agrega más campos de socio según sea necesario
+            };
+            var partners = localStorage.getItem('offline_partners');
+            if (!partners) {
+                partners = [];
+            } else {
+                partners = JSON.parse(partners);
+            }
+            partners.push(partnerData);
+            localStorage.setItem('offline_partners', JSON.stringify(partners));
+            alert('Socio guardado offline');
+            // Aquí puedes redirigir a otra pantalla o realizar otras acciones necesarias
+        });
+    });
+</script>
