@@ -52,13 +52,7 @@
 							<i class="fa fa-undo"></i>
 						</t>
 					</div>
-					<div class="search-bar-container sb-partner">
-                        <div class="pos-search-bar">
-                            <i class="fa fa-search" t-on-click="_onPressEnterKey"/>
-                            <input t-ref="search-word-input-partner" placeholder="Search Orders" size="1" t-on-keyup="searchOrders" />
-                            <i class="fa fa-times" t-on-click="_clearSearch"/>
-                        </div>
-                    </div>
+
 				</div>
 				<section class="full-content">
                     <div class="partner-window">
