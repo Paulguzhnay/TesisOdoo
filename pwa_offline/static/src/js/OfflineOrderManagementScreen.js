@@ -99,7 +99,6 @@ odoo.define('pwa_offline.OfflineOrderManagementScreen', function (require) {
 		}
 	}
 
-
 	OfflineOrderManagementScreen.template = 'OfflineOrderManagementScreen';
 	OfflineOrderManagementScreen.hideOrderSelector = true;
 	Registries.Component.add(OfflineOrderManagementScreen);

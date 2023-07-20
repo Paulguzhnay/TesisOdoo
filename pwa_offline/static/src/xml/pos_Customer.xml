@@ -2,20 +2,21 @@
 <templates id="template" xml:space="preserve">
 
 	<t t-name="OfflineClientManagementButton" owl="1">
-		<div class="oe_status offline-order-management" t-on-click="onClick">
+		<div class="oe_status offline-client-management" t-on-click="onClick">
 			<div class="oe_icon oe_green" style="font-size: large;
-    margin-top: 2px;">
-			<i class="fa fa-fw" role="img" style="margin-left: 50px;">
-				<img src="/pwa_offline/static/img/icons/people.png" alt="Offline Client Management Button"
-					 title="" style=" width: 30px; height: 30px " />
-			</i>
+    		margin-top: 13px;">
+				<i class="fa fa-fw">
+					<img src="/pwa_offline/static/img/icons/people.png"
+					 aaria-label="Offline Client Management Button"
+					 title="Offline Client Management Button" style=" width: 25px; height: 25px;" />
+				</i>
 			</div>
-</div>
+		</div>
 
     </t>
 
     <t t-name="Chrome" t-inherit="point_of_sale.Chrome" t-inherit-mode="extension" owl="1">
-        <xpath expr="//TicketButton" position="after">
+        <xpath expr="//TicketButton" position="before">
             <OfflineClientManagementButton />
         </xpath>
     </t>
@@ -23,20 +24,31 @@
 	<t t-name="ClientLines" owl="1">
 		<tr t-attf-class="partner-line {{highlight}}" t-att-data-id="props.order.id"
 			t-on-click="() => this.props.onClickPosOrder(props.order)">
-			<td  t-att-data-id='props.order.id'>
-				<t t-esc='props.order.name' />
-			</td>
-			<td  t-att-data-id='props.order.id' >
-				<t t-esc="get_date(props.order.creation_date)"/>
 
-			</td>
 			<td  t-att-data-id='props.order.id' >
-				<t t-esc="get_partner(props.order.partner_id)"/>
+				<t t-esc="get_partnerC(props.order.partner_id)"/>
 			</td>
 
 			<td  t-att-data-id='props.order.id' >
-				<t t-esc='env.pos.format_currency(props.order.amount_total)' />
+				<t t-esc="get_partnerName(props.order.partner_id)"/>
 			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerStreet(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerCity(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerEmail(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerPhone(props.order.partner_id)"/>
+			</td>
+
 			<td>
 				<div name="delete" class="col center very-narrow delete-button"  t-att-data-id='props.order.id' t-on-click.stop="() => this.props.onClickDeleteOrder(props.order)">
 					<i aria-hidden="true" class="fa fa-trash"></i>
@@ -56,13 +68,7 @@
 							<i class="fa fa-undo"></i>
 						</t>
 					</div>
-					<div class="search-bar-container sb-partner">
-                        <div class="pos-search-bar">
-                            <i class="fa fa-search" t-on-click="_onPressEnterKey"/>
-                            <input t-ref="search-word-input-partner" placeholder="Search Orders" size="1" t-on-keyup="searchOrders" />
-                            <i class="fa fa-times" t-on-click="_clearSearch"/>
-                        </div>
-                    </div>
+
 				</div>
 				<section class="full-content">
                     <div class="partner-window">
@@ -72,21 +78,23 @@
                                     <table class="partner-list">
                                         <thead>
                                             <tr>
-                                                <th>Nameeeee</th>
-                                                <th>Daaaaaaaaaaaaate</th>
-                                                <th>Customer</th>
-                                                <th>Amount</th>
-                                                <th>Delete</th>
+                                                <th>Cedula</th>
+                                                <th>Nombre</th>
+												<th>Calle</th>
+                                                <th>Ciudad</th>
+                                                <th>Email</th>
+                                                <th>Telefono</th>
+												 <th>Eliminar</th>
                                             </tr>
                                         </thead>
                                         <tbody class="partner-list-contents">
                                             <t t-foreach="orders" t-as="order"
                                                t-key="order.id">
-                                                <OrderLine
+                                                <ClientLines
                                                 	order="order['data']"
                                                 	onClickDeleteOrder.bind="deleteOrder"
 													onClickPosOrder.bind="offlineOrderView"
-                                                	/>
+												/>
                                             </t>
                                         </tbody>
                                     </table>
@@ -98,6 +106,4 @@
 			</div>
 		</div>
 	</t>
-
-
 </templates>
