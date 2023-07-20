@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates id="template" xml:space="preserve">
-    <t t-name="PointOfSaleWidget">
-        <div id="pos_pwa_div">
-            <button id="pos_pwa_button" class="btn btn-primary">Abrir PWA</button>
-        </div>
-    </t>
-</templates>
