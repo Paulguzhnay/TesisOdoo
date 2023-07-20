@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="OfflineClientManagementButton" owl="1">
+		<div class="oe_status offline-client-management" t-on-click="onClick">
+			<div class="oe_icon oe_green" style="font-size: large;
+    		margin-top: 13px;">
+				<i class="fa fa-fw">
+					<img src="/pwa_offline/static/img/icons/people.png"
+					 aaria-label="Offline Client Management Button"
+					 title="Offline Client Management Button" style=" width: 25px; height: 25px;" />
+				</i>
+			</div>
+		</div>
+
+    </t>
+
+    <t t-name="Chrome" t-inherit="point_of_sale.Chrome" t-inherit-mode="extension" owl="1">
+        <xpath expr="//TicketButton" position="before">
+            <OfflineClientManagementButton />
+        </xpath>
+    </t>
+
+	<t t-name="ClientLines" owl="1">
+		<tr t-attf-class="partner-line {{highlight}}" t-att-data-id="props.order.id"
+			t-on-click="() => this.props.onClickPosOrder(props.order)">
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerC(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerName(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerStreet(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerCity(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerEmail(props.order.partner_id)"/>
+			</td>
+
+			<td  t-att-data-id='props.order.id' >
+				<t t-esc="get_partnerPhone(props.order.partner_id)"/>
+			</td>
+
+			<td>
+				<div name="delete" class="col center very-narrow delete-button"  t-att-data-id='props.order.id' t-on-click.stop="() => this.props.onClickDeleteOrder(props.order)">
+					<i aria-hidden="true" class="fa fa-trash"></i>
+				</div>
+			</td>
+		</tr>
+	</t>
+
+
+	<t t-name="OfflineClientManagementScreen" owl="1">
+		<div class="offline-order-screen partnerlist-screen screen">
+			<div class="screen-content">
+				<div class="top-content">
+					<div class="button back" t-on-click="back">
+						<t t-if="!env.isMobile">Discard</t>
+						<t t-else="">
+							<i class="fa fa-undo"></i>
+						</t>
+					</div>
+
+				</div>
+				<section class="full-content">
+                    <div class="partner-window">
+                        <section class="subwindow list">
+                            <div class="subwindow-container">
+                                <div class="subwindow-container-fix scrollable-y">
+                                    <table class="partner-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Cedula</th>
+                                                <th>Nombre</th>
+												<th>Calle</th>
+                                                <th>Ciudad</th>
+                                                <th>Email</th>
+                                                <th>Telefono</th>
+												 <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="partner-list-contents">
+                                            <t t-foreach="orders" t-as="order"
+                                               t-key="order.id">
+                                                <ClientLines
+                                                	order="order['data']"
+                                                	onClickDeleteOrder.bind="deleteOrder"
+													onClickPosOrder.bind="offlineOrderView"
+												/>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+			</div>
+		</div>
+	</t>
+</templates>
