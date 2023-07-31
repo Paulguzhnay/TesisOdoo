@@ -5,21 +5,12 @@ from odoo import models, fields, api
 
 class PWA(Controller):
 
-    @route('/get_pos_name', type='json', auth='user')
-    def get_current_pos_name(self):
-        session_id = request.session.get('pos_session_id')
-        if session_id:
-            pos_session = request.env['pos.session'].sudo().browse(session_id)
-            return pos_session.name
-        else:
-            return False
-
     @route('/pwa_offline/manifest.webmanifest', type='http', auth='public')
     def pwa_manifest(self):
 
         manifest_data = {
-            "name": f"Caja {self.get_current_pos_name()}",
-            "short_name": f"Caja {self.get_current_pos_name()}",
+            "name": "Odoo PWA",
+            "short_name": "Odoo PWA",
             "start_url": "/pos/web",
             "display": "standalone",
             "background_color": "#FFFFFF",
