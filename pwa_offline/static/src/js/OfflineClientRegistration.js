@@ -8,20 +8,7 @@ odoo.define('pwa_offline.PartnerListScreen', function (require) {
     const { isConnectionError } = require('point_of_sale.utils');
     const { onMounted, onWillUnmount } = owl;
 
-    // const PosLoyaltyPartnerDetailsEditScreen = (PartnerDetailsEdit) =>
-    //     class extends PartnerDetailsEdit {
-    //         setup() {
-    //             super.setup();
-    //             onMounted(() => {
-    //                 const CurrentPartner = this.props.partner
-    //                 if (CurrentPartner){
-    //                     cons
-    //                 }
-    //             });
-    //         }
-    //      }
 
-    // Registries.Component.extend(PartnerDetailsEdit, PosLoyaltyPartnerDetailsEditScreen);
 
     const PosLoyaltyPartnerListScreen = (PartnerListScreen) =>
         class extends PartnerListScreen {
@@ -58,8 +45,8 @@ odoo.define('pwa_offline.PartnerListScreen', function (require) {
 
                             if (isConnectionError(error)) {
                                 await this.showPopup('OfflineErrorPopup', {
-                                    title: this.env._t('Temporary Customer Updated!'),
-                                    body: this.env._t(' When you online customer Updated automatically !'),
+                                    title: this.env._t('Cliente Actualizado '),
+                                    body: this.env._t(' Cuando exista conexión se sincronizara'),
                                 });
                             } else {
                                 throw error;
@@ -80,8 +67,8 @@ odoo.define('pwa_offline.PartnerListScreen', function (require) {
                                 self.env.pos.get_order().set_partner(CurrentPartner)
                                 if (isConnectionError(error)) {
                                     await this.showPopup('OfflineErrorPopup', {
-                                        title: this.env._t('Temporary Customer Created!'),
-                                        body: this.env._t(' When you online customer created automatically !'),
+                                        title: this.env._t('Cliente Creado'),
+                                        body: this.env._t('  Cuando exista conexión se sincronizara'),
                                     });
                                 } else {
                                     throw error;

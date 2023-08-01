@@ -49,8 +49,6 @@
 				<t t-esc="get_partnerPhone(props.order.partner_id)"/>
 			</td>
 
-
-
 			<td>
 				<div name="delete" class="col center very-narrow delete-button"  t-att-data-id='props.order.id' t-on-click.stop="() => this.props.onClickDeleteOrder(props.order)">
 					<i aria-hidden="true" class="fa fa-trash"></i>
@@ -96,7 +94,7 @@
                                                 	order="order['data']"
                                                 	onClickDeleteOrder.bind="deleteOrder"
 													onClickPosOrder.bind="offlineOrderView"
-                                                	/>
+												/>
                                             </t>
                                         </tbody>
                                     </table>
@@ -108,6 +106,4 @@
 			</div>
 		</div>
 	</t>
-
-
 </templates>

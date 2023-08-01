@@ -2,11 +2,15 @@
 <templates id="template" xml:space="preserve">
 	
 	<t t-name="OfflineOrderManagementButton" owl="1">
-		<div class="oe_status offline-order-management" t-on-click="onClick">
-			<div class="oe_icon oe_green" style="font-size: large;
-    margin-top: 13px;">
-				<i class="fa fa-fw fa-search" role="img" aria-label="Offline Order Management Button" title="Offline Order Management Button"></i>
-			</div>
+		<div class="oe_status offline-client-management" t-on-click="onClick">
+					<div class="oe_icon oe_green" style="font-size: large;
+					margin-top: 13px;">
+						<i class="fa fa-fw">
+							<img src="/pwa_offline/static/img/icons/orders.png"
+							 aaria-label="Offline Client Management Button"
+							 title="Offline Client Management Button" style=" width: 30px; height: 30px;" />
+						</i>
+					</div>
 		</div>
     </t>
 
@@ -52,7 +56,6 @@
 							<i class="fa fa-undo"></i>
 						</t>
 					</div>
-
 				</div>
 				<section class="full-content">
                     <div class="partner-window">
@@ -164,6 +167,4 @@
 			</Draggable>
 		</div>
 	</t>
-
-
 </templates>

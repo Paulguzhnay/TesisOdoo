@@ -2,9 +2,6 @@
 <templates id="template" xml:space="preserve">
     <!-- Modifica los botones +10 +20 +50 por +5 +10 +20-->
     <t t-name="PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
-
-
-
         <xpath expr="//div[hasclass('partner-details-left')]/div[1]" position="before">
              <div class="partner-detail">
                 <div class="partner-detail">
@@ -77,6 +74,5 @@
                 </select>
             </div>
         </xpath>
-
     </t>
 </templates>

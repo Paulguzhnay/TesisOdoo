@@ -37,9 +37,7 @@ odoo.define("pwa_offline.PWAManager", function (require) {
                 );
             } else {
                 this._service_worker = navigator.serviceWorker;
-                this.registerServiceWorker("/pwa_offline/static/src/js/lib/cache.js", {
-                    updateViaCache: "none",
-                });
+                this.registerServiceWorker('/pos-cache', {scope: '/pos/'});
             }
         },
 
@@ -52,7 +50,7 @@ odoo.define("pwa_offline.PWAManager", function (require) {
                 .register(sw_script, options)
                 .then(this._onRegisterServiceWorker.bind(this))
                 .catch(function (error) {
-                    console.log(_t("El Registro del Service Worker falló: "), error);
+                    console.log(_t("El registro del Service Workers falló: "), error);
                 });
         },
 
@@ -68,8 +66,10 @@ odoo.define("pwa_offline.PWAManager", function (require) {
          * @param {ServiceWorkerRegistration} registration
          */
         _onRegisterServiceWorker: function (registration) {
-            console.log(_t("Service Worker Registrado:"), registration);
+            console.log(_t("Service Workers registrado:"), registration);
         },
+
+
     });
     return PWAManager;
 });

@@ -29,7 +29,6 @@ const buildCacheKey = ({url, body: {method, params}}) =>
 const get_url = (request) => request.method === 'GET';
 
 const cacheTheRequest = async (request, response) => {
-    console.log(request)
     if (get_url(request)) {
         const cache = await caches.open('Cache-POS');
         await cache.put(request.clone(), response.clone());

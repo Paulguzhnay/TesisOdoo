@@ -1,15 +1,12 @@
 <odoo>
-    <template id="web_layout_pwa" name="Layout PWA" inherit_id="web.webclient_bootstrap">
-        <xpath expr="//t[@t-call-assets='web.assets_common']" position="before">
-            <!--  Add link rel manifest  -->
-            <link rel="manifest" t-attf-href="/pwa_offline/manifest.webmanifest"/>
-            <!--  Add iOS meta tags and icons  -->
+    <template id="pwa_POS" name="Layout PWA" inherit_id="point_of_sale.assets_common">
+        <xpath expr="//t[@t-call-assets='point_of_sale.assets']" position="before">
+            <link rel="manifest" t-attf-href="/pwa_offline/manifest.webmanifest" />
             <meta name="apple-mobile-web-app-capable" content="yes"/>
             <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
             <t t-set="pwa_name" t-value="request.env['ir.config_parameter'].sudo().get_param('pwa.manifest.name')"/>
             <meta name="apple-mobile-web-app-title" t-att-content="pwa_name"/>
             <link rel="apple-touch-icon" href="/pwa_offline/static/img/icons/icon-152x152.png"/>
-            <!--  Add meta theme-color  -->
             <t t-set="pwa_theme_color" t-value="request.env['ir.config_parameter'].sudo().get_param('pwa.manifest.theme_color')"/>
             <meta name="theme-color" t-att-content="pwa_theme_color"/>
         </xpath>
